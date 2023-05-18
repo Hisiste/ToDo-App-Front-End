@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { add_todo, select_todos } from "../features/todo/reducer";
 
-export function Reducer() {
+export function NewToDo() {
     const my_todos = useSelector(select_todos);
+
     const dispatch = useDispatch();
     const [new_text, set_new_text] = useState("");
     const [new_done, set_new_done] = useState(false);
@@ -16,8 +17,6 @@ export function Reducer() {
         set_new_text("");
         set_new_done(false);
         set_new_priority("Low");
-
-        console.log("CLEANED.");
     }
 
     return (
@@ -176,58 +175,65 @@ export function Reducer() {
                     </div>
                 </div>
             </div>
-            <div className="container">
-                <table className="table align-middle">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Priority</th>
-                            <th scope="col">Due Date</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody className="table-group-divider">
-                        {my_todos.map((item) => (
-                            <tr key={item.id}>
-                                <th scope="row">
-                                    <div className="form-check">
-                                        <input
-                                            className="form-check-input"
-                                            type="checkbox"
-                                            checked={item.done}
-                                            id="flexCheckChecked"
-                                        ></input>
-                                    </div>
-                                </th>
-                                <td>{item.text}</td>
-                                <td>{item.priority}</td>
-                                <td>{item.due_date}</td>
-                                <td>
-                                    <div
-                                        className="btn-group btn-group-sm"
-                                        role="group"
-                                        aria-label="Basic example"
-                                    >
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-dark"
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-dark"
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
         </>
+    );
+}
+
+export function ListToDos() {
+    const my_todos = useSelector(select_todos);
+
+    return (
+        <div className="container">
+            <table className="table align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Due Date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody className="table-group-divider">
+                    {my_todos.map((item) => (
+                        <tr key={item.id}>
+                            <th scope="row">
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        checked={item.done}
+                                        id="flexCheckChecked"
+                                    ></input>
+                                </div>
+                            </th>
+                            <td>{item.text}</td>
+                            <td>{item.priority}</td>
+                            <td>{item.due_date}</td>
+                            <td>
+                                <div
+                                    className="btn-group btn-group-sm"
+                                    role="group"
+                                    aria-label="Basic example"
+                                >
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-dark"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-dark"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }

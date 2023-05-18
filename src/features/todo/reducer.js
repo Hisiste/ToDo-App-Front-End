@@ -28,5 +28,6 @@ export const todo_slice = createSlice({
 export const { add_todo } = todo_slice.actions;
 
 export const select_todos = (state) => state.todo_list.todos;
+export const select_last_index = (state) => state.todo_list.last_id;
 
 export default todo_slice.reducer;

@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { add_todo, select_todos } from "./features/todo/reducer";
+import {
+    add_todo,
+    select_todos,
+    select_last_index,
+} from "./features/todo/reducer";
 
 export function NewToDo() {
     const my_todos = useSelector(select_todos);
+    const my_last_idx = useSelector(select_last_index);
 
     const dispatch = useDispatch();
     const [new_text, set_new_text] = useState("");
@@ -68,7 +73,7 @@ export function NewToDo() {
                                     <input
                                         className="form-control"
                                         id="new-todo-id"
-                                        value="4"
+                                        value={my_last_idx + 1}
                                         disabled
                                     />
                                     <label htmlFor="floatingInput">ID</label>

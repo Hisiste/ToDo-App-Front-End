@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     add_todo,
+    change_done,
     select_todos,
     select_last_index,
 } from "./features/todo/reducer";
@@ -186,6 +187,7 @@ export function NewToDo() {
 
 export function ListToDos() {
     const my_todos = useSelector(select_todos);
+    const dispatch = useDispatch();
 
     return (
         <div className="container">
@@ -209,7 +211,14 @@ export function ListToDos() {
                                         type="checkbox"
                                         checked={item.done}
                                         id="flexCheckChecked"
-                                        disabled
+                                        onChange={(e) =>
+                                            dispatch(
+                                                change_done({
+                                                    id: item.id,
+                                                    done: e.target.checked,
+                                                })
+                                            )
+                                        }
                                     ></input>
                                 </div>
                             </th>

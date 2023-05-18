@@ -1,7 +1,7 @@
 import React from "react";
 // import { Counter } from "./features/counter/Counter";
 import { Search } from "./ToDo-UI/Search";
-import { Reducer } from "./features/todo/ToDo";
+import { Reducer } from "./ToDo-UI/ToDo";
 
 function App() {
     return (

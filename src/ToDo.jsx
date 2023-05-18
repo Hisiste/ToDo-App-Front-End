@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     add_todo,
     change_done,
+    remove_todo,
     select_todos,
     select_last_index,
 } from "./features/todo/reducer";
@@ -241,7 +242,9 @@ export function ListToDos() {
                                     <button
                                         type="button"
                                         className="btn btn-outline-dark"
-                                        disabled
+                                        onClick={(e) =>
+                                            dispatch(remove_todo(item.id))
+                                        }
                                     >
                                         Delete
                                     </button>

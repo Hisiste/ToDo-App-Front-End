@@ -30,10 +30,16 @@ export const todo_slice = createSlice({
 
             state.todos[selected_todo].done = action.payload.done;
         },
+
+        remove_todo: (state, action) => {
+            state.todos = state.todos.filter(
+                (todo) => todo.id != action.payload
+            );
+        },
     },
 });
 
-export const { add_todo, change_done } = todo_slice.actions;
+export const { add_todo, change_done, remove_todo } = todo_slice.actions;
 
 export const select_todos = (state) => state.todo_list.todos;
 export const select_last_index = (state) => state.todo_list.last_id;

@@ -1,16 +1,13 @@
 import React from "react";
-import { Counter } from "./features/counter/Counter";
+// import { Counter } from "./features/counter/Counter";
 import { Search } from "./ToDo-UI/Search";
-import { NewToDo } from "./ToDo-UI/NewToDo";
-import { ToDoList } from "./ToDo-UI/ToDoList";
+import { Reducer } from "./features/todo/ToDo";
 
 function App() {
     return (
         <div>
             <Search />
-            <NewToDo />
-            <ToDoList />
-            <Counter />
+            <Reducer />
         </div>
     );
 }

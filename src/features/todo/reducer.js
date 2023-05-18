@@ -20,7 +20,6 @@ export const todo_slice = createSlice({
                     creation_date: action.payload.creation_date,
                 },
             ];
-            console.log(state.todos);
         },
     },
 });

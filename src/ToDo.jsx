@@ -209,6 +209,7 @@ export function ListToDos() {
                                         type="checkbox"
                                         checked={item.done}
                                         id="flexCheckChecked"
+                                        disabled
                                     ></input>
                                 </div>
                             </th>
@@ -224,12 +225,14 @@ export function ListToDos() {
                                     <button
                                         type="button"
                                         className="btn btn-outline-dark"
+                                        disabled
                                     >
                                         Edit
                                     </button>
                                     <button
                                         type="button"
                                         className="btn btn-outline-dark"
+                                        disabled
                                     >
                                         Delete
                                     </button>

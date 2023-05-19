@@ -54,10 +54,7 @@ export function NewToDo() {
                 >
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5
-                                className="modal-title"
-                                id="exampleModalLongTitle"
-                            >
+                            <h5 className="modal-title" id="new-modal-title">
                                 Add a new to do
                             </h5>
                             <button
@@ -79,7 +76,7 @@ export function NewToDo() {
                                         value={my_last_idx + 1}
                                         disabled
                                     />
-                                    <label htmlFor="floatingInput">ID</label>
+                                    <label htmlFor="new-todo-id">ID</label>
                                 </div>
                                 <div className="form-floating mb-3">
                                     <input
@@ -90,7 +87,7 @@ export function NewToDo() {
                                             set_new_text(e.target.value)
                                         }
                                     />
-                                    <label htmlFor="floatingInput">Text</label>
+                                    <label htmlFor="new-todo-text">Text</label>
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">
@@ -103,7 +100,7 @@ export function NewToDo() {
                                             name="new-todo-due-date"
                                             placeholder="Due date"
                                         />
-                                        <label htmlFor="floatingInput">
+                                        <label htmlFor="new-todo-due-date">
                                             Due Date
                                         </label>
                                     </div>
@@ -112,15 +109,14 @@ export function NewToDo() {
                                     <input
                                         className="form-check-input"
                                         type="checkbox"
-                                        value=""
-                                        id="flexCheckDefault"
+                                        id="new-todo-done"
                                         onChange={(e) =>
                                             set_new_done(e.target.checked)
                                         }
                                     />
                                     <label
                                         className="form-check-label"
-                                        htmlFor="flexCheckDefault"
+                                        htmlFor="new-todo-done"
                                     >
                                         Done
                                     </label>
@@ -128,7 +124,7 @@ export function NewToDo() {
                                 <div className="form-floating mb-3">
                                     <select
                                         className="form-select"
-                                        id="floatingSelect"
+                                        id="new-todo-priority"
                                         aria-label="Floating label select example"
                                         onChange={(e) =>
                                             set_new_priority(e.target.value)
@@ -140,7 +136,7 @@ export function NewToDo() {
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
                                     </select>
-                                    <label htmlFor="floatingSelect">
+                                    <label htmlFor="new-todo-priority">
                                         Priority
                                     </label>
                                 </div>
@@ -236,7 +232,7 @@ export function ListToDos() {
                                             className="form-check-input"
                                             type="checkbox"
                                             checked={item.done}
-                                            id="flexCheckChecked"
+                                            id={"list-todo-done-" + item.id}
                                             onChange={(e) =>
                                                 dispatch(
                                                     change_done({
@@ -325,7 +321,7 @@ export function ListToDos() {
                                         value={edit_id}
                                         disabled
                                     />
-                                    <label htmlFor="floatingInput">ID</label>
+                                    <label htmlFor="edit-todo-id">ID</label>
                                 </div>
                                 <div className="form-floating mb-3">
                                     <input
@@ -337,7 +333,7 @@ export function ListToDos() {
                                             set_edit_text(e.target.value)
                                         }
                                     />
-                                    <label htmlFor="floatingInput">Text</label>
+                                    <label htmlFor="edit-todo-text">Text</label>
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">
@@ -351,7 +347,7 @@ export function ListToDos() {
                                             placeholder="Due date"
                                             value={edit_due_date}
                                         />
-                                        <label htmlFor="floatingInput">
+                                        <label htmlFor="edit-todo-due-date">
                                             Due Date
                                         </label>
                                     </div>
@@ -360,8 +356,7 @@ export function ListToDos() {
                                     <input
                                         className="form-check-input"
                                         type="checkbox"
-                                        value=""
-                                        id="flexCheckDefault"
+                                        id="edit-todo-done"
                                         onChange={(e) =>
                                             set_edit_done(e.target.checked)
                                         }
@@ -369,7 +364,7 @@ export function ListToDos() {
                                     />
                                     <label
                                         className="form-check-label"
-                                        htmlFor="flexCheckDefault"
+                                        htmlFor="edit-todo-done"
                                     >
                                         Done
                                     </label>
@@ -377,7 +372,7 @@ export function ListToDos() {
                                 <div className="form-floating mb-3">
                                     <select
                                         className="form-select"
-                                        id="floatingSelect"
+                                        id="edit-todo-priority"
                                         aria-label="Floating label select example"
                                         value={edit_priority}
                                         onChange={(e) =>
@@ -388,7 +383,7 @@ export function ListToDos() {
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
                                     </select>
-                                    <label htmlFor="floatingSelect">
+                                    <label htmlFor="edit-todo-priority">
                                         Priority
                                     </label>
                                 </div>

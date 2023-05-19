@@ -15,6 +15,7 @@ export function NewToDo() {
 
     const dispatch = useDispatch();
     const [new_text, set_new_text] = useState("");
+    const [new_due_date, set_new_due_date] = useState("");
     const [new_done, set_new_done] = useState(false);
     const [new_priority, set_new_priority] = useState("Low");
 
@@ -23,6 +24,7 @@ export function NewToDo() {
         $("form").get(0).reset(); // Reset form
 
         set_new_text("");
+        set_new_due_date("");
         set_new_done(false);
         set_new_priority("Low");
     }
@@ -88,15 +90,17 @@ export function NewToDo() {
                                     <label htmlFor="new-todo-text">Text</label>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">
-                                        <i className="fa-regular fa-calendar"></i>
-                                    </span>
                                     <div className="form-floating">
                                         <input
                                             className="form-control"
+                                            type="date"
                                             id="new-todo-due-date"
-                                            name="new-todo-due-date"
                                             placeholder="Due date"
+                                            onChange={(e) => {
+                                                set_new_due_date(
+                                                    e.target.value
+                                                );
+                                            }}
                                         />
                                         <label htmlFor="new-todo-due-date">
                                             Due Date
@@ -155,11 +159,7 @@ export function NewToDo() {
                                     dispatch(
                                         add_todo({
                                             text: new_text,
-                                            // Cannot update date on change. :'(
-                                            due_date:
-                                                document.getElementById(
-                                                    "new-todo-due-date"
-                                                ).value,
+                                            due_date: new_due_date,
                                             done: new_done,
                                             priority: new_priority,
                                             creation_date:
@@ -330,16 +330,18 @@ export function ListToDos() {
                                     <label htmlFor="edit-todo-text">Text</label>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">
-                                        <i className="fa-regular fa-calendar"></i>
-                                    </span>
                                     <div className="form-floating">
                                         <input
                                             className="form-control"
+                                            type="date"
                                             id="edit-todo-due-date"
-                                            name="edit-todo-due-date"
                                             placeholder="Due date"
                                             value={edit_due_date}
+                                            onChange={(e) => {
+                                                set_edit_due_date(
+                                                    e.target.value
+                                                );
+                                            }}
                                         />
                                         <label htmlFor="edit-todo-due-date">
                                             Due Date
@@ -399,11 +401,7 @@ export function ListToDos() {
                                         edit_todo({
                                             id: edit_id,
                                             text: edit_text,
-                                            // Cannot update date on change. :'(
-                                            due_date:
-                                                document.getElementById(
-                                                    "edit-todo-due-date"
-                                                ).value,
+                                            due_date: edit_due_date,
                                             done: edit_done,
                                             priority: edit_priority,
                                         })

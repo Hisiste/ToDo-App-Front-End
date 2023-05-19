@@ -5,45 +5,6 @@
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-
-    <!--Font Awesome (added because you use icons in your prepend/append)-->
-    <script src="https://kit.fontawesome.com/090a180a9a.js" crossorigin="anonymous"></script>
-
-    <!-- Include jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
-    <!-- Include Date Range Picker -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.css"/>
-
-    <script>
-      $(document).ready(function(){
-        var date_input=$('input[name="new-todo-due-date"]');
-        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-        date_input.datepicker({
-            format: 'mm/dd/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-            maxViewMode: 3,
-            todayBtn: "linked"
-        })
-      })
-  </script>
-  <script>
-      $(document).ready(function(){
-        var date_input=$('input[name="edit-todo-due-date"]');
-        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-        date_input.datepicker({
-            format: 'mm/dd/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-            maxViewMode: 3,
-            todayBtn: "linked"
-        })
-      })
-  </script>
   </head>
   <body>
     <div id="root"></div>

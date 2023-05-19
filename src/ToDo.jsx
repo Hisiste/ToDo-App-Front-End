@@ -45,8 +45,6 @@ export function NewToDo() {
                 id="NewToDo"
                 tabIndex="-1"
                 role="dialog"
-                aria-labelledby="New To Do Window"
-                aria-hidden="true"
             >
                 <div
                     className="modal-dialog modal-dialog-centered"
@@ -61,10 +59,10 @@ export function NewToDo() {
                                 type="button"
                                 className="close"
                                 data-bs-dismiss="modal"
-                                aria-label="Close"
+                                aria-label="Close new to do window"
                                 onClick={handle_exit_modal}
                             >
-                                <span aria-hidden="true">&times;</span>
+                                <span>&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
@@ -125,7 +123,6 @@ export function NewToDo() {
                                     <select
                                         className="form-select"
                                         id="new-todo-priority"
-                                        aria-label="Floating label select example"
                                         onChange={(e) =>
                                             set_new_priority(e.target.value)
                                         }
@@ -251,7 +248,6 @@ export function ListToDos() {
                                     <div
                                         className="btn-group btn-group-sm"
                                         role="group"
-                                        aria-label="Basic example"
                                     >
                                         <button
                                             type="button"
@@ -292,8 +288,6 @@ export function ListToDos() {
                 id="EditToDo"
                 tabIndex="-1"
                 role="dialog"
-                aria-labelledby="New To Do Window"
-                aria-hidden="true"
             >
                 <div
                     className="modal-dialog modal-dialog-centered"
@@ -306,10 +300,10 @@ export function ListToDos() {
                                 type="button"
                                 className="close"
                                 data-bs-dismiss="modal"
-                                aria-label="Close"
+                                aria-label="Close edit window"
                                 onClick={handle_exit_modal}
                             >
-                                <span aria-hidden="true">&times;</span>
+                                <span>&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
@@ -373,7 +367,6 @@ export function ListToDos() {
                                     <select
                                         className="form-select"
                                         id="edit-todo-priority"
-                                        aria-label="Floating label select example"
                                         value={edit_priority}
                                         onChange={(e) =>
                                             set_edit_priority(e.target.value)

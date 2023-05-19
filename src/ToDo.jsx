@@ -108,7 +108,7 @@ export function NewToDo() {
                                         className="form-check-input"
                                         type="checkbox"
                                         id="new-todo-done"
-                                        onChange={(e) =>
+                                        onClick={(e) =>
                                             set_new_done(e.target.checked)
                                         }
                                     />
@@ -351,7 +351,7 @@ export function ListToDos() {
                                         className="form-check-input"
                                         type="checkbox"
                                         id="edit-todo-done"
-                                        onChange={(e) =>
+                                        onClick={(e) =>
                                             set_edit_done(e.target.checked)
                                         }
                                         checked={edit_done}

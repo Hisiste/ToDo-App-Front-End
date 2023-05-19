@@ -30,6 +30,20 @@
         })
       })
   </script>
+  <script>
+      $(document).ready(function(){
+        var date_input=$('input[name="edit-todo-due-date"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            maxViewMode: 3,
+            todayBtn: "linked"
+        })
+      })
+  </script>
   </head>
   <body>
     <div id="root"></div>

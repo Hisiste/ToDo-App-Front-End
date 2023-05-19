@@ -36,10 +36,23 @@ export const todo_slice = createSlice({
                 (todo) => todo.id != action.payload
             );
         },
+
+        edit_todo: (state, action) => {
+            let selected_todo = state.todos.findIndex(
+                (x) => x.id == action.payload.id
+            );
+            if (selected_todo == -1) return;
+
+            state.todos[selected_todo].text = action.payload.text;
+            state.todos[selected_todo].due_date = action.payload.due_date;
+            state.todos[selected_todo].done = action.payload.done;
+            state.todos[selected_todo].priority = action.payload.priority;
+        },
     },
 });
 
-export const { add_todo, change_done, remove_todo } = todo_slice.actions;
+export const { add_todo, change_done, remove_todo, edit_todo } =
+    todo_slice.actions;
 
 export const select_todos = (state) => state.todo_list.todos;
 export const select_last_index = (state) => state.todo_list.last_id;

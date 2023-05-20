@@ -5,6 +5,7 @@ import {
     change_done,
     remove_todo,
     edit_todo,
+    set_sort_todo,
     sort_todo,
     select_todos,
     select_last_index,
@@ -168,7 +169,8 @@ export function NewToDo() {
                                                 new Date().toString(),
                                         })
                                     ),
-                                        handle_exit_modal();
+                                        dispatch(sort_todo());
+                                    handle_exit_modal();
                                 }}
                                 data-bs-dismiss="modal"
                             >
@@ -245,23 +247,27 @@ export function ListToDos() {
                             <th scope="col">Name</th>
                             <th
                                 scope="col"
-                                onClick={(e) =>
+                                onClick={(e) => {
                                     dispatch(
-                                        sort_todo({
+                                        set_sort_todo({
                                             where_clicked: "priority",
                                         })
-                                    )
-                                }
+                                    ),
+                                        dispatch(sort_todo());
+                                }}
                             >
                                 {sort_table_header("Priority", my_sorting)}
                             </th>
                             <th
                                 scope="col"
-                                onClick={(e) =>
+                                onClick={(e) => {
                                     dispatch(
-                                        sort_todo({ where_clicked: "due_date" })
-                                    )
-                                }
+                                        set_sort_todo({
+                                            where_clicked: "due_date",
+                                        })
+                                    ),
+                                        dispatch(sort_todo());
+                                }}
                             >
                                 {sort_table_header("Due Date", my_sorting)}
                             </th>
@@ -454,6 +460,7 @@ export function ListToDos() {
                                             priority: edit_priority,
                                         })
                                     ),
+                                        dispatch(sort_todo()),
                                         handle_exit_modal();
                                 }}
                                 data-bs-dismiss="modal"

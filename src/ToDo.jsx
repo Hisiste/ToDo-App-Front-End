@@ -465,7 +465,7 @@ export function ListToDos() {
                                 }}
                                 data-bs-dismiss="modal"
                             >
-                                Add
+                                Edit
                             </button>
                         </div>
                     </div>

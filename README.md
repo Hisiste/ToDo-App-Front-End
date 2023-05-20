@@ -79,7 +79,7 @@ should appear with the following inputs:
 -   `Text` $\rightarrow$ The name of the to do.
 -   `Due date` $\rightarrow$ The date for which the to do is due. **It only
     accepts days and not hours, minutes nor seconds.**
--   `Done` $\rightarrow$ If the to do is already completed or not.
+-   `Completed` $\rightarrow$ If the to do is already completed or not.
 -   `Priority` $\rightarrow$ The priority of the to do. It could be either
     _Low_, _Medium_ or _High_.
 

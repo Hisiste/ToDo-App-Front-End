@@ -123,7 +123,7 @@ export function NewToDo() {
                                         className="form-check-label"
                                         htmlFor="new-todo-done"
                                     >
-                                        Done
+                                        Completed
                                     </label>
                                 </div>
                                 <div className="form-floating mb-3">
@@ -243,7 +243,7 @@ export function ListToDos() {
                 <table className="table align-middle">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Done</th>
                             <th scope="col">Name</th>
                             <th
                                 scope="col"
@@ -416,7 +416,7 @@ export function ListToDos() {
                                         className="form-check-label"
                                         htmlFor="edit-todo-done"
                                     >
-                                        Done
+                                        Completed
                                     </label>
                                 </div>
                                 <div className="form-floating mb-3">

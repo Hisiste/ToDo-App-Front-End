@@ -21,13 +21,17 @@ recommended to use version 20.x or above.
 You can run it locally using the following commands:
 
 1. Clone this repository.
+
     ```
     git clone https://github.com/Hisiste/ToDo-App-Front-End.git
     ```
+
 1. Enter the folder and install the dependencies.
+
     ```
     cd ToDo-App-Front-End && npm install
     ```
+
 1. Run a server.
 
     ```

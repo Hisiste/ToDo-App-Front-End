@@ -5,8 +5,10 @@ import {
     change_done,
     remove_todo,
     edit_todo,
+    sort_todo,
     select_todos,
     select_last_index,
+    select_current_sorting,
 } from "./features/todo/reducer";
 
 export function NewToDo() {
@@ -180,8 +182,34 @@ export function NewToDo() {
     );
 }
 
+function sort_table_header(prefix, current_sorting) {
+    if (prefix.toLowerCase().startsWith(current_sorting.substr(0, 3))) {
+        switch (current_sorting.substr(-1)) {
+            case "^":
+                return (
+                    <>
+                        {prefix} <span>&#8593;</span>
+                    </>
+                );
+            case "v":
+                return (
+                    <>
+                        {prefix} <span>&#8595;</span>
+                    </>
+                );
+        }
+    } else {
+        return (
+            <>
+                {prefix} <span>&#8283;</span>
+            </>
+        );
+    }
+}
+
 export function ListToDos() {
     const my_todos = useSelector(select_todos);
+    const my_sorting = useSelector(select_current_sorting);
     const dispatch = useDispatch();
 
     const [edit_id, set_edit_id] = useState(-1);
@@ -215,8 +243,28 @@ export function ListToDos() {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Priority</th>
-                            <th scope="col">Due Date</th>
+                            <th
+                                scope="col"
+                                onClick={(e) =>
+                                    dispatch(
+                                        sort_todo({
+                                            where_clicked: "priority",
+                                        })
+                                    )
+                                }
+                            >
+                                {sort_table_header("Priority", my_sorting)}
+                            </th>
+                            <th
+                                scope="col"
+                                onClick={(e) =>
+                                    dispatch(
+                                        sort_todo({ where_clicked: "due_date" })
+                                    )
+                                }
+                            >
+                                {sort_table_header("Due Date", my_sorting)}
+                            </th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>

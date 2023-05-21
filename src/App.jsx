@@ -1,6 +1,6 @@
 import React from "react";
-// import { Counter } from "./features/counter/Counter";
-import { NewToDo, ListToDos } from "./ToDo";
+import { NewToDo } from "./ToDo-UI/NewToDo";
+import { ListToDos } from "./ToDo-UI/ListToDo";
 
 function App() {
     return (

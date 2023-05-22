@@ -6,6 +6,7 @@ import {
     edit_todo,
     set_sort_todo,
     sort_todo,
+    refresh_filtered_todos,
     select_todos,
     select_current_sorting,
 } from "../features/todo/reducer";
@@ -50,6 +51,7 @@ function list_of_todos(edit_button, delete_button) {
             })
         );
         dispatch(sort_todo());
+        dispatch(refresh_filtered_todos());
     }
 
     // Table contents
@@ -85,14 +87,15 @@ function list_of_todos(edit_button, delete_button) {
                                 type="checkbox"
                                 checked={item.done}
                                 id={"list-todo-done-" + item.id}
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     dispatch(
                                         change_done({
                                             id: item.id,
                                             done: e.target.checked,
                                         })
-                                    )
-                                }
+                                    ),
+                                        dispatch(refresh_filtered_todos());
+                                }}
                             ></input>
                         </div>
                     </th>
@@ -170,6 +173,7 @@ export function ListToDos() {
             })
         );
         dispatch(sort_todo());
+        dispatch(refresh_filtered_todos());
         handle_exit_modal();
     }
 
@@ -200,7 +204,10 @@ export function ListToDos() {
             <button
                 type="button"
                 className="btn btn-outline-dark"
-                onClick={(e) => dispatch(remove_todo(item.id))}
+                onClick={(e) => {
+                    dispatch(remove_todo(item.id)),
+                        dispatch(refresh_filtered_todos());
+                }}
             >
                 Delete
             </button>

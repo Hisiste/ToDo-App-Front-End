@@ -3,9 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const todo_slice = createSlice({
     name: "todo_list",
     initialState: {
-        todos: [],
         last_id: 0,
+        todos: [],
+
         current_sorting: "created_time",
+
+        filtered_todos: [],
+        current_filters: {
+            name: "",
+            priority: "All",
+            state: "All",
+        },
     },
 
     reducers: {
@@ -127,6 +135,39 @@ export const todo_slice = createSlice({
                     break;
             }
         },
+
+        set_filters: (state, action) => {
+            state.current_filters = {
+                name: action.payload.name,
+                priority: action.payload.priority,
+                state: action.payload.state, // True is "1" and False is "0".
+            };
+        },
+
+        refresh_filtered_todos: (state) => {
+            state.filtered_todos = [...state.todos];
+
+            // If name, filter by names.
+            if (state.current_filters.name.length != 0) {
+                state.filtered_todos = state.filtered_todos.filter((todo) =>
+                    todo.text.includes(state.current_filters.name)
+                );
+            }
+
+            // If priority != all, filter by priorities.
+            if (state.current_filters.priority != "All") {
+                state.filtered_todos = state.filtered_todos.filter(
+                    (todo) => todo.priority === state.current_filters.priority
+                );
+            }
+
+            // If state != All, filter by current state.
+            if (state.current_filters.state != "All") {
+                state.filtered_todos = state.filtered_todos.filter(
+                    (todo) => todo.done == state.current_filters.state
+                );
+            }
+        },
     },
 });
 
@@ -137,9 +178,11 @@ export const {
     edit_todo,
     set_sort_todo,
     sort_todo,
+    set_filters,
+    refresh_filtered_todos,
 } = todo_slice.actions;
 
-export const select_todos = (state) => state.todo_list.todos;
+export const select_todos = (state) => state.todo_list.filtered_todos;
 export const select_last_index = (state) => state.todo_list.last_id;
 export const select_current_sorting = (state) =>
     state.todo_list.current_sorting;

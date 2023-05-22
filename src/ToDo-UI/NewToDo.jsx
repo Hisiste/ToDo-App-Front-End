@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     add_todo,
     sort_todo,
+    refresh_filtered_todos,
     select_last_index,
 } from "../features/todo/reducer";
 
@@ -64,6 +65,7 @@ export function NewToDo() {
             })
         );
         dispatch(sort_todo());
+        dispatch(refresh_filtered_todos());
         handle_exit_modal();
     }
 

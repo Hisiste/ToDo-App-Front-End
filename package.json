@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.3.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 8080",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 8080"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

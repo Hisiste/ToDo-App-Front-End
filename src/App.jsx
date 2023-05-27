@@ -18,7 +18,10 @@ function App() {
                 set_todo({
                     id: todo.id,
                     text: todo.text,
-                    due_date: todo.dueDate.substring(0, 16),
+                    due_date:
+                        todo.dueDate != null
+                            ? todo.dueDate.substring(0, 16)
+                            : todo.dueDate,
                     done: todo.done,
                     priority: todo.priority,
                     creation_date: todo.creationDate,

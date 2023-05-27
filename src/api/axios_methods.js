@@ -30,3 +30,20 @@ export function new_todo_function() {
         }
     };
 }
+
+// editToDo() on BE.
+export function edit_todo_function() {
+    // Edit an existing to do.
+    // PUT "/todos/{id}"
+    return async (data) => {
+        try {
+            await api.put(`/todos/${data.id}`, {
+                text: data.text,
+                dueDate: data.due_date,
+                priority: data.priority,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}

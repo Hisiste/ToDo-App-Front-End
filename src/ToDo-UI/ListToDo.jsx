@@ -11,6 +11,8 @@ import {
     select_current_sorting,
 } from "../features/todo/reducer";
 
+import { edit_todo_function } from "../api/axios_methods";
+
 function sort_table_header(prefix, current_sorting) {
     if (prefix.toLowerCase().startsWith(current_sorting.substr(0, 3))) {
         switch (current_sorting.substr(-1)) {
@@ -145,6 +147,8 @@ export function ListToDos() {
     const [edit_due_date, set_edit_due_date] = useState("");
     const [edit_priority, set_edit_priority] = useState("Low");
 
+    const edit_todo_api = edit_todo_function();
+
     function handle_open_modal(id, text, due_date, done, priority) {
         set_edit_id(id);
         set_edit_text(text);
@@ -160,6 +164,12 @@ export function ListToDos() {
         set_edit_priority("Low");
     }
     function handle_edit_todo() {
+        edit_todo_api({
+            id: edit_id,
+            text: edit_text,
+            due_date: edit_due_date,
+            priority: edit_priority,
+        });
         dispatch(
             edit_todo({
                 id: edit_id,

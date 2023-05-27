@@ -275,7 +275,7 @@ export function ListToDos() {
                     <div className="form-floating">
                         <input
                             className="form-control"
-                            type="date"
+                            type="datetime-local"
                             id="edit-todo-due-date"
                             placeholder="Due date"
                             value={edit_due_date}

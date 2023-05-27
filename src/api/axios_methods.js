@@ -47,3 +47,16 @@ export function edit_todo_function() {
         }
     };
 }
+
+// removeToDo().
+export function remove_todo_function() {
+    // Remove an existing to do by its id.
+    // DELETE "/todos/{id}"
+    return async (data) => {
+        try {
+            await api.delete(`/todos/${data.id}`);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}

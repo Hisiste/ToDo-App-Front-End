@@ -11,7 +11,7 @@ import {
     select_current_sorting,
 } from "../features/todo/reducer";
 
-import { edit_todo_function } from "../api/axios_methods";
+import { edit_todo_function, remove_todo_function } from "../api/axios_methods";
 
 function sort_table_header(prefix, current_sorting) {
     if (prefix.toLowerCase().startsWith(current_sorting.substr(0, 3))) {
@@ -148,6 +148,7 @@ export function ListToDos() {
     const [edit_priority, set_edit_priority] = useState("Low");
 
     const edit_todo_api = edit_todo_function();
+    const remove_todo_api = remove_todo_function();
 
     function handle_open_modal(id, text, due_date, done, priority) {
         set_edit_id(id);
@@ -211,8 +212,9 @@ export function ListToDos() {
                 type="button"
                 className="btn btn-outline-dark"
                 onClick={(e) => {
-                    dispatch(remove_todo(item.id)),
-                        dispatch(refresh_filtered_todos());
+                    remove_todo_api({ id: item.id });
+                    dispatch(remove_todo(item.id));
+                    dispatch(refresh_filtered_todos());
                 }}
             >
                 Delete

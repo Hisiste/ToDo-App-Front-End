@@ -31,6 +31,31 @@ export const todo_slice = createSlice({
             ];
         },
 
+        set_todo: (state, action) => {
+            let selected_todo = state.todos.findIndex(
+                (x) => x.id == action.payload.id
+            );
+            if (selected_todo == -1) {
+                state.todos = [
+                    ...state.todos,
+                    {
+                        id: action.payload.id,
+                        text: action.payload.text,
+                        due_date: action.payload.due_date,
+                        done: action.payload.done,
+                        priority: action.payload.priority,
+                        creation_date: action.payload.creation_date,
+                    },
+                ];
+                state.last_id++;
+            } else {
+                state.todos[selected_todo].text = action.payload.text;
+                state.todos[selected_todo].due_date = action.payload.due_date;
+                state.todos[selected_todo].done = action.payload.done;
+                state.todos[selected_todo].priority = action.payload.priority;
+            }
+        },
+
         change_done: (state, action) => {
             let selected_todo = state.todos.findIndex(
                 (x) => x.id == action.payload.id
@@ -173,6 +198,7 @@ export const todo_slice = createSlice({
 
 export const {
     add_todo,
+    set_todo,
     change_done,
     remove_todo,
     edit_todo,

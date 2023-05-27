@@ -143,14 +143,12 @@ export function ListToDos() {
     const [edit_id, set_edit_id] = useState(-1);
     const [edit_text, set_edit_text] = useState("");
     const [edit_due_date, set_edit_due_date] = useState("");
-    const [edit_done, set_edit_done] = useState(false);
     const [edit_priority, set_edit_priority] = useState("Low");
 
     function handle_open_modal(id, text, due_date, done, priority) {
         set_edit_id(id);
         set_edit_text(text);
         set_edit_due_date(due_date);
-        set_edit_done(done);
         set_edit_priority(priority);
     }
     function handle_exit_modal() {
@@ -159,7 +157,6 @@ export function ListToDos() {
 
         set_edit_id(-1);
         set_edit_text("");
-        set_edit_done(false);
         set_edit_priority("Low");
     }
     function handle_edit_todo() {
@@ -168,7 +165,6 @@ export function ListToDos() {
                 id: edit_id,
                 text: edit_text,
                 due_date: edit_due_date,
-                done: edit_done,
                 priority: edit_priority,
             })
         );
@@ -285,21 +281,6 @@ export function ListToDos() {
                         />
                         <label htmlFor="edit-todo-due-date">Due Date</label>
                     </div>
-                </div>
-                <div className="form-check mb-3">
-                    <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="edit-todo-done"
-                        onClick={(e) => set_edit_done(e.target.checked)}
-                        checked={edit_done}
-                    />
-                    <label
-                        className="form-check-label"
-                        htmlFor="edit-todo-done"
-                    >
-                        Completed
-                    </label>
                 </div>
                 <div className="form-floating mb-3">
                     <select

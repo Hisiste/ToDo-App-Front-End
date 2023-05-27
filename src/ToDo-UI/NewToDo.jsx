@@ -42,7 +42,6 @@ export function NewToDo() {
     const dispatch = useDispatch();
     const [new_text, set_new_text] = useState("");
     const [new_due_date, set_new_due_date] = useState("");
-    const [new_done, set_new_done] = useState(false);
     const [new_priority, set_new_priority] = useState("Low");
 
     function handle_exit_modal() {
@@ -51,7 +50,6 @@ export function NewToDo() {
 
         set_new_text("");
         set_new_due_date("");
-        set_new_done(false);
         set_new_priority("Low");
     }
     function handle_add_todo() {
@@ -59,7 +57,6 @@ export function NewToDo() {
             add_todo({
                 text: new_text,
                 due_date: new_due_date,
-                done: new_done,
                 priority: new_priority,
                 creation_date: new Date().toString(),
             })
@@ -129,7 +126,7 @@ export function NewToDo() {
                     <div className="form-floating">
                         <input
                             className="form-control"
-                            type="date"
+                            type="datetime-local"
                             id="new-todo-due-date"
                             placeholder="Due date"
                             onChange={(e) => {
@@ -138,17 +135,6 @@ export function NewToDo() {
                         />
                         <label htmlFor="new-todo-due-date">Due Date</label>
                     </div>
-                </div>
-                <div className="form-check mb-3">
-                    <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="new-todo-done"
-                        onClick={(e) => set_new_done(e.target.checked)}
-                    />
-                    <label className="form-check-label" htmlFor="new-todo-done">
-                        Completed
-                    </label>
                 </div>
                 <div className="form-floating mb-3">
                     <select

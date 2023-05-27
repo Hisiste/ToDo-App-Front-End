@@ -24,7 +24,7 @@ export const todo_slice = createSlice({
                     id: ++state.last_id,
                     text: action.payload.text,
                     due_date: action.payload.due_date,
-                    done: action.payload.done,
+                    done: false,
                     priority: action.payload.priority,
                     creation_date: action.payload.creation_date,
                 },
@@ -79,7 +79,6 @@ export const todo_slice = createSlice({
 
             state.todos[selected_todo].text = action.payload.text;
             state.todos[selected_todo].due_date = action.payload.due_date;
-            state.todos[selected_todo].done = action.payload.done;
             state.todos[selected_todo].priority = action.payload.priority;
         },
 

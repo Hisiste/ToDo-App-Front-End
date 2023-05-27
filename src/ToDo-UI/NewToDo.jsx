@@ -7,6 +7,8 @@ import {
     select_last_index,
 } from "../features/todo/reducer";
 
+import { new_todo_function } from "../api/axios_methods";
+
 function new_button(trigger_id) {
     return (
         <div className="container mt-3 mb-3">
@@ -44,6 +46,8 @@ export function NewToDo() {
     const [new_due_date, set_new_due_date] = useState("");
     const [new_priority, set_new_priority] = useState("Low");
 
+    const new_todo_api = new_todo_function();
+
     function handle_exit_modal() {
         // https://stackoverflow.com/questions/27826381/clearing-form-input-fields-in-bootstrap
         $("form").get(0).reset(); // Reset form
@@ -53,6 +57,11 @@ export function NewToDo() {
         set_new_priority("Low");
     }
     function handle_add_todo() {
+        new_todo_api({
+            text: new_text,
+            due_date: new_due_date,
+            priority: new_priority,
+        });
         dispatch(
             add_todo({
                 text: new_text,

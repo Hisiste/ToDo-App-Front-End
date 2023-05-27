@@ -60,3 +60,29 @@ export function remove_todo_function() {
         }
     };
 }
+
+// setDone().
+export function set_done_function() {
+    // Set a to do as done. If already done, don't do anything.
+    // POST "/todos/{id}/done"
+    return async (data) => {
+        try {
+            await api.post(`/todos/${data.id}/done`);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}
+
+// setUndone().
+export function set_undone_function() {
+    // Set a to do as not done. If it's already not done, don't do anything.
+    // PUT "/todos/{id}/undone"
+    return async (data) => {
+        try {
+            await api.put(`/todos/${data.id}/undone`);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}

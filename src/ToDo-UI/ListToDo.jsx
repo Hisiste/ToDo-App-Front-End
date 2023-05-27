@@ -11,7 +11,12 @@ import {
     select_current_sorting,
 } from "../features/todo/reducer";
 
-import { edit_todo_function, remove_todo_function } from "../api/axios_methods";
+import {
+    edit_todo_function,
+    remove_todo_function,
+    set_done_function,
+    set_undone_function,
+} from "../api/axios_methods";
 
 function sort_table_header(prefix, current_sorting) {
     if (prefix.toLowerCase().startsWith(current_sorting.substr(0, 3))) {
@@ -56,6 +61,9 @@ function list_of_todos(edit_button, delete_button) {
         dispatch(refresh_filtered_todos());
     }
 
+    const set_done_api = set_done_function();
+    const set_undone_api = set_undone_function();
+
     // Table contents
     var table_head = (
         <thead>
@@ -90,13 +98,16 @@ function list_of_todos(edit_button, delete_button) {
                                 checked={item.done}
                                 id={"list-todo-done-" + item.id}
                                 onChange={(e) => {
+                                    e.target.checked
+                                        ? set_done_api({ id: item.id })
+                                        : set_undone_api({ id: item.id });
                                     dispatch(
                                         change_done({
                                             id: item.id,
                                             done: e.target.checked,
                                         })
-                                    ),
-                                        dispatch(refresh_filtered_todos());
+                                    );
+                                    dispatch(refresh_filtered_todos());
                                 }}
                             ></input>
                         </div>

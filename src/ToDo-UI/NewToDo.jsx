@@ -59,15 +59,21 @@ export function NewToDo() {
     function handle_add_todo() {
         new_todo_api({
             text: new_text,
-            due_date: new_due_date,
+            due_date:
+                new_due_date.length == 0
+                    ? ""
+                    : new Date(new_due_date).toISOString(),
             priority: new_priority,
         });
         dispatch(
             add_todo({
                 text: new_text,
-                due_date: new_due_date,
+                due_date:
+                    new_due_date.length == 0
+                        ? ""
+                        : new Date(new_due_date).toISOString(),
                 priority: new_priority,
-                creation_date: new Date().toString(),
+                creation_date: new Date().toISOString(),
             })
         );
         dispatch(sort_todo());

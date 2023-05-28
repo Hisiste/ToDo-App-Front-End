@@ -64,6 +64,14 @@ function list_of_todos(edit_button, delete_button) {
     const set_done_api = set_done_function();
     const set_undone_api = set_undone_function();
 
+    const date_options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+    };
+
     // Table contents
     var table_head = (
         <thead>
@@ -114,7 +122,14 @@ function list_of_todos(edit_button, delete_button) {
                     </th>
                     <td>{item.text}</td>
                     <td>{item.priority}</td>
-                    <td>{item.due_date}</td>
+                    <td>
+                        {item.due_date.length == 0
+                            ? ""
+                            : new Date(item.due_date).toLocaleString(
+                                  undefined, // <- Select locale of computer.
+                                  date_options
+                              )}
+                    </td>
                     <td>
                         <div className="btn-group btn-group-sm" role="group">
                             {edit_button(item)}
@@ -164,7 +179,17 @@ export function ListToDos() {
     function handle_open_modal(id, text, due_date, done, priority) {
         set_edit_id(id);
         set_edit_text(text);
-        set_edit_due_date(due_date);
+        if (due_date.length == 0) {
+            set_edit_due_date("");
+        } else {
+            due_date = new Date(due_date);
+            const offset = due_date.getTimezoneOffset();
+            set_edit_due_date(
+                new Date(due_date - offset * 60 * 1000) // Ignore the timezone offset.
+                    .toISOString() // Convert to ISO format (YYYY-MM-DDTHH:mm:ss.sssZ)
+                    .slice(0, -1) // Get rid of the Z at the end.
+            );
+        }
         set_edit_priority(priority);
     }
     function handle_exit_modal() {
@@ -179,14 +204,20 @@ export function ListToDos() {
         edit_todo_api({
             id: edit_id,
             text: edit_text,
-            due_date: edit_due_date,
+            due_date:
+                edit_due_date.length == 0
+                    ? new Date(0)
+                    : new Date(edit_due_date).toISOString(),
             priority: edit_priority,
         });
         dispatch(
             edit_todo({
                 id: edit_id,
                 text: edit_text,
-                due_date: edit_due_date,
+                due_date:
+                    edit_due_date.length == 0
+                        ? ""
+                        : new Date(edit_due_date).toISOString(),
                 priority: edit_priority,
             })
         );

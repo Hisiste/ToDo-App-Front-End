@@ -14,14 +14,19 @@ function App() {
     const dispatch = useDispatch();
     function handler(data) {
         data.map((todo) => {
+            const due_date = new Date(todo.dueDate);
+            const offset = due_date.getTimezoneOffset();
+
             dispatch(
                 set_todo({
                     id: todo.id,
                     text: todo.text,
                     due_date:
                         todo.dueDate != null
-                            ? todo.dueDate.substring(0, 16)
-                            : todo.dueDate,
+                            ? new Date(due_date - offset * 60 * 1000)
+                                  .toISOString()
+                                  .slice(0, -1)
+                            : "",
                     done: todo.done,
                     priority: todo.priority,
                     creation_date: todo.creationDate,

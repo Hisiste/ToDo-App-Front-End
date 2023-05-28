@@ -1,17 +1,21 @@
 # To Do App (Front End)
 
 A basic and simple To Do App. **This is just the front end part. The back end
-will be later added on a different repository.**
+part is on a different repository in this same account. Go check it out!**
 
 ## Try it yourself!
-
-**_NOTE: It doesn't save any info. After restarting the page, all info will be
-deleted._**
 
 ### Online
 
 You can try this program online. Go to the following link:
 [https://hisiste.github.io/ToDo-App-Front-End/](https://hisiste.github.io/ToDo-App-Front-End/)
+
+**_NOTE: It doesn't save any info, as the Back End is not implemented here.
+After restarting the page, all info will be deleted._**
+
+**_NOTE 2: You will see a lot of errors on the console part of the page. This is
+normal. It will try to communicate with the API but won't find it. Regardless,
+this is still usable and you can experiment with it._**
 
 ### Locally
 
@@ -50,6 +54,8 @@ You can run it locally using the following commands:
 
     There you have your URL!
 
+1. Be sure to also clone the Back End and run it to save your to dos!
+
 ## Goals
 
 The program currently has/lacks the following functionality:
@@ -58,7 +64,7 @@ The program currently has/lacks the following functionality:
 -   [x] Ability to edit name, priority and due date for existing "to do" tasks.
     -   Be able to specify a due date or clear the due date (not interested in
         when to finish that "to do"?).
--   [ ] Be able to filter "to do's" specifying the name (or part of the name),
+-   [x] Be able to filter "to do's" specifying the name (or part of the name),
         the priority and if they are done/undone.
 -   [x] Be able to sort the "to do's" by priority and/or due date.
     -   For example, be able to sort items where their due date is soon and sort

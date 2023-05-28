@@ -4,9 +4,13 @@ import { NewToDo } from "./ToDo-UI/NewToDo";
 import { ListToDos } from "./ToDo-UI/ListToDo";
 
 import { useDispatch } from "react-redux";
-import { set_todo, refresh_filtered_todos } from "./features/todo/reducer";
+import {
+    set_last_id,
+    set_todo,
+    refresh_filtered_todos,
+} from "./features/todo/reducer";
 
-import { get_todos_function } from "./api/axios_methods";
+import { get_todos_function, get_last_id_function } from "./api/axios_methods";
 
 function App() {
     const get_todos = get_todos_function();
@@ -36,6 +40,15 @@ function App() {
         dispatch(refresh_filtered_todos());
     }
     get_todos(handler);
+
+    const last_id_api = get_last_id_function();
+    last_id_api((response) => {
+        dispatch(
+            set_last_id({
+                id: response,
+            })
+        );
+    });
 
     return (
         <div>

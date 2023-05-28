@@ -17,6 +17,10 @@ export const todo_slice = createSlice({
     },
 
     reducers: {
+        set_last_id: (state, action) => {
+            state.last_id = action.payload.id;
+        },
+
         add_todo: (state, action) => {
             state.todos = [
                 ...state.todos,
@@ -196,6 +200,7 @@ export const todo_slice = createSlice({
 });
 
 export const {
+    set_last_id,
     add_todo,
     set_todo,
     change_done,

@@ -86,3 +86,17 @@ export function set_undone_function() {
         }
     };
 }
+
+// giveMeLastID().
+export function get_last_id_function() {
+    // Retrieve last index used.
+    // GET "/todos/lastIndex"
+    return async (handler) => {
+        try {
+            const response = await api.get("/todos/lastIndex");
+            handler(response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}

@@ -14,6 +14,8 @@ export const todo_slice = createSlice({
             priority: "All",
             state: "All",
         },
+
+        page_selected: 1,
     },
 
     reducers: {
@@ -128,6 +130,14 @@ export const todo_slice = createSlice({
                 state: action.payload.state,
             };
         },
+
+        empty_todos: (state) => {
+            state.todos = [];
+        },
+
+        change_page: (state, action) => {
+            state.page_selected = action.payload.page;
+        },
     },
 });
 
@@ -140,6 +150,8 @@ export const {
     edit_todo,
     set_sort_todo,
     set_filters,
+    empty_todos,
+    change_page,
 } = todo_slice.actions;
 
 export const select_todos = (state) => state.todo_list.todos;
@@ -148,5 +160,6 @@ export const select_current_sorting = (state) =>
     state.todo_list.current_sorting;
 export const select_current_filters = (state) =>
     state.todo_list.current_filters;
+export const select_current_page = (state) => state.todo_list.page_selected;
 
 export default todo_slice.reducer;

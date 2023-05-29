@@ -5,10 +5,10 @@ import {
     remove_todo,
     edit_todo,
     set_sort_todo,
-    sort_todo,
-    refresh_filtered_todos,
     select_todos,
+    select_current_filters,
     select_current_sorting,
+    select_current_page,
 } from "../features/todo/reducer";
 
 import {
@@ -17,6 +17,8 @@ import {
     set_done_function,
     set_undone_function,
 } from "../api/axios_methods";
+
+import { refresh_todos } from "../refreshToDos";
 
 function sort_table_header(prefix, current_sorting) {
     if (prefix.toLowerCase().startsWith(current_sorting.substr(0, 3))) {
@@ -49,7 +51,7 @@ function sort_table_header(prefix, current_sorting) {
 function list_of_todos(edit_button, delete_button) {
     const dispatch = useDispatch();
     const my_todos = useSelector(select_todos);
-    const my_sorting = useSelector(select_current_sorting);
+    const my_sorters = useSelector(select_current_sorting);
 
     function handle_sort_todos(where_clicked) {
         dispatch(
@@ -57,8 +59,6 @@ function list_of_todos(edit_button, delete_button) {
                 where_clicked: where_clicked,
             })
         );
-        dispatch(sort_todo());
-        dispatch(refresh_filtered_todos());
     }
 
     const set_done_api = set_done_function();
@@ -79,7 +79,7 @@ function list_of_todos(edit_button, delete_button) {
                 <th scope="col">Done</th>
                 <th scope="col">Name</th>
                 <th scope="col" onClick={() => handle_sort_todos("priority")}>
-                    {sort_table_header("Priority", my_sorting)}
+                    {sort_table_header("Priority", my_sorters)}
                 </th>
                 <th
                     scope="col"
@@ -87,7 +87,7 @@ function list_of_todos(edit_button, delete_button) {
                         handle_sort_todos("due_date");
                     }}
                 >
-                    {sort_table_header("Due Date", my_sorting)}
+                    {sort_table_header("Due Date", my_sorters)}
                 </th>
                 <th scope="col">Actions</th>
             </tr>
@@ -115,7 +115,6 @@ function list_of_todos(edit_button, delete_button) {
                                             done: e.target.checked,
                                         })
                                     );
-                                    dispatch(refresh_filtered_todos());
                                 }}
                             ></input>
                         </div>
@@ -221,8 +220,6 @@ export function ListToDos() {
                 priority: edit_priority,
             })
         );
-        dispatch(sort_todo());
-        dispatch(refresh_filtered_todos());
         handle_exit_modal();
     }
 
@@ -256,7 +253,6 @@ export function ListToDos() {
                 onClick={(e) => {
                     remove_todo_api({ id: item.id });
                     dispatch(remove_todo(item.id));
-                    dispatch(refresh_filtered_todos());
                 }}
             >
                 Delete

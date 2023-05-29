@@ -69,8 +69,8 @@ export function Search() {
                             <option value="All" defaultValue>
                                 All
                             </option>
-                            <option value="1">Done</option>
-                            <option value="0">Undone</option>
+                            <option value="Done">Done</option>
+                            <option value="Undone">Undone</option>
                         </select>
                     </div>
                 </div>

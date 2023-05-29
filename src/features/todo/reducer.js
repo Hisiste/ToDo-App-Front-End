@@ -6,7 +6,7 @@ export const todo_slice = createSlice({
         last_id: 0,
         todos: [],
 
-        current_sorting: "created_time",
+        current_sorting: "Id/ASC",
 
         filtered_todos: [],
         current_filters: {
@@ -90,77 +90,34 @@ export const todo_slice = createSlice({
             switch (action.payload.where_clicked) {
                 case "priority":
                     switch (state.current_sorting) {
-                        case "priority-^":
-                            state.current_sorting = "priority-v";
+                        case "Priority/DESC":
+                            state.current_sorting = "Priority/ASC";
                             break;
 
-                        case "priority-v":
-                            state.current_sorting = "created_time";
+                        case "Priority/ASC":
+                            state.current_sorting = "Id/ASC";
                             break;
 
                         default:
-                            state.current_sorting = "priority-^";
+                            state.current_sorting = "Priority/DESC";
                             break;
                     }
                     break;
 
                 case "due_date":
                     switch (state.current_sorting) {
-                        case "due-date-^":
-                            state.current_sorting = "due-date-v";
+                        case "DueDate/DESC":
+                            state.current_sorting = "DueDate/ASC";
                             break;
 
-                        case "due-date-v":
-                            state.current_sorting = "created_time";
+                        case "DueDate/ASC":
+                            state.current_sorting = "Id/ASC";
                             break;
 
                         default:
-                            state.current_sorting = "due-date-^";
+                            state.current_sorting = "DueDate/DESC";
                             break;
                     }
-            }
-        },
-
-        sort_todo: (state) => {
-            const priority_order = {
-                Low: 1,
-                Medium: 2,
-                High: 3,
-            };
-            switch (state.current_sorting) {
-                case "priority-^":
-                    state.todos.sort(
-                        (a, b) =>
-                            priority_order[b.priority] -
-                            priority_order[a.priority]
-                    );
-                    break;
-
-                case "priority-v":
-                    state.todos.sort(
-                        (a, b) =>
-                            priority_order[a.priority] -
-                            priority_order[b.priority]
-                    );
-                    break;
-
-                case "due-date-^":
-                    state.todos.sort((a, b) =>
-                        b.due_date.localeCompare(a.due_date)
-                    );
-                    break;
-
-                case "due-date-v":
-                    state.todos.sort((a, b) =>
-                        a.due_date.localeCompare(b.due_date)
-                    );
-                    break;
-
-                default:
-                    state.todos.sort((a, b) =>
-                        a.creation_date.localeCompare(b.creation_date)
-                    );
-                    break;
             }
         },
 
@@ -168,33 +125,8 @@ export const todo_slice = createSlice({
             state.current_filters = {
                 name: action.payload.name,
                 priority: action.payload.priority,
-                state: action.payload.state, // True is "1" and False is "0".
+                state: action.payload.state,
             };
-        },
-
-        refresh_filtered_todos: (state) => {
-            state.filtered_todos = [...state.todos];
-
-            // If name, filter by names.
-            if (state.current_filters.name.length != 0) {
-                state.filtered_todos = state.filtered_todos.filter((todo) =>
-                    todo.text.includes(state.current_filters.name)
-                );
-            }
-
-            // If priority != all, filter by priorities.
-            if (state.current_filters.priority != "All") {
-                state.filtered_todos = state.filtered_todos.filter(
-                    (todo) => todo.priority === state.current_filters.priority
-                );
-            }
-
-            // If state != All, filter by current state.
-            if (state.current_filters.state != "All") {
-                state.filtered_todos = state.filtered_todos.filter(
-                    (todo) => todo.done == state.current_filters.state
-                );
-            }
         },
     },
 });
@@ -207,14 +139,14 @@ export const {
     remove_todo,
     edit_todo,
     set_sort_todo,
-    sort_todo,
     set_filters,
-    refresh_filtered_todos,
 } = todo_slice.actions;
 
-export const select_todos = (state) => state.todo_list.filtered_todos;
+export const select_todos = (state) => state.todo_list.todos;
 export const select_last_index = (state) => state.todo_list.last_id;
 export const select_current_sorting = (state) =>
     state.todo_list.current_sorting;
+export const select_current_filters = (state) =>
+    state.todo_list.current_filters;
 
 export default todo_slice.reducer;

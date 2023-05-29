@@ -87,6 +87,55 @@ export function set_undone_function() {
     };
 }
 
+// setFiltersAndSorters().
+export function set_fil_sort_function() {
+    // Set filters and sorters for our to dos.
+    // POST "/todos/setFiltSort"
+    return async (data) => {
+        try {
+            await api.post("/todos/setFiltSort", {
+                filters: {
+                    name: data.filter.name,
+                    priority: data.filter.priority,
+                    done: data.filter.state,
+                },
+                sortField: data.sort.field,
+                sortOrder: data.sort.order,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}
+
+// getPage().
+export function get_todos_page_function() {
+    // Return a page of max 10 to dos with sorting and filters added.
+    // GET "/todos/filtSort/{page}"
+    return async (handler, data) => {
+        try {
+            const response = await api.get(`/todos/filtSort/${data.page}`);
+            handler(response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}
+
+// getNumberOfPages().
+export function get_nu_pages_function() {
+    // Return the number of pages in total.
+    // GET "/todos/filtSort/pages"
+    return async () => {
+        try {
+            const response = await api.get("/todos/filtSort/pages");
+            return response.data;
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}
+
 // giveMeLastID().
 export function get_last_id_function() {
     // Retrieve last index used.

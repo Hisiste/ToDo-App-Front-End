@@ -29,16 +29,26 @@ export function refresh_todos(my_filters, my_sorters, my_curr_page, dispatch) {
     });
 
     // Get the total number of pages. Change the current page if necessary.
-    const get_nu_pages_api = get_nu_pages_function();
-    const total_pages_api = get_nu_pages_api();
-
-    if (total_pages_api < my_curr_page) {
-        dispatch(
-            change_page({
-                page: total_pages_api,
-            })
-        );
+    function handle_out_of_bounds(total_pages) {
+        if (total_pages == 0) {
+            dispatch(
+                change_page({
+                    page: 1,
+                })
+            );
+        } else if (total_pages < my_curr_page) {
+            dispatch(
+                change_page({
+                    page: total_pages,
+                })
+            );
+        }
     }
+
+    const get_nu_pages_api = get_nu_pages_function();
+    const total_pages_api = get_nu_pages_api((nu_pages) => {
+        handle_out_of_bounds(nu_pages);
+    });
 
     // Delete all current to dos we have stored and retrieve new to dos from API.
     const get_todos_api = get_todos_page_function();

@@ -126,10 +126,10 @@ export function get_todos_page_function() {
 export function get_nu_pages_function() {
     // Return the number of pages in total.
     // GET "/todos/filtSort/pages"
-    return async () => {
+    return async (handler) => {
         try {
             const response = await api.get("/todos/filtSort/pages");
-            return response.data;
+            handler(response.data);
         } catch (err) {
             console.log(err);
         }

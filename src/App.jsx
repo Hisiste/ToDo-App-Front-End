@@ -2,6 +2,7 @@ import React from "react";
 import { Search } from "./ToDo-UI/Search";
 import { NewToDo } from "./ToDo-UI/NewToDo";
 import { ListToDos } from "./ToDo-UI/ListToDo";
+import { Pagination } from "./ToDo-UI/Pagination";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -25,6 +26,7 @@ function App() {
             <Search />
             <NewToDo />
             <ListToDos />
+            <Pagination />
         </div>
     );
 }

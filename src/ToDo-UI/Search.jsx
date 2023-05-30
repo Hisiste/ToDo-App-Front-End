@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { set_filters, refresh_filtered_todos } from "../features/todo/reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { set_filters } from "../features/todo/reducer";
+
+import {
+    select_current_filters,
+    select_current_sorting,
+    select_current_page,
+} from "../features/todo/reducer";
+
+import { refresh_todos } from "../refreshToDos";
 
 export function Search() {
     const dispatch = useDispatch();
@@ -8,6 +16,10 @@ export function Search() {
     const [search_name, set_search_name] = useState("");
     const [search_priority, set_search_priority] = useState("All");
     const [search_state, set_search_state] = useState("All");
+
+    const my_filters = useSelector(select_current_filters);
+    const my_sorters = useSelector(select_current_sorting);
+    const my_curr_page = useSelector(select_current_page);
 
     function handle_search() {
         dispatch(
@@ -17,7 +29,7 @@ export function Search() {
                 state: search_state,
             })
         );
-        dispatch(refresh_filtered_todos());
+        refresh_todos(my_filters, my_sorters, my_curr_page, dispatch);
     }
 
     return (

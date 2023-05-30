@@ -10,8 +10,6 @@ import {
     select_current_page,
 } from "./features/todo/reducer";
 
-import { get_last_id_function } from "./api/axios_methods";
-
 import { refresh_todos } from "./refreshToDos";
 
 function App() {

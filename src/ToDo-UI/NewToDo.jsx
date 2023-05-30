@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    add_todo,
-    sort_todo,
-    refresh_filtered_todos,
     select_last_index,
+    select_current_filters,
+    select_current_sorting,
+    select_current_page,
 } from "../features/todo/reducer";
 
 import { new_todo_function } from "../api/axios_methods";
+
+import { refresh_todos } from "../refreshToDos";
 
 function new_button(trigger_id) {
     return (
@@ -46,6 +48,10 @@ export function NewToDo() {
     const [new_due_date, set_new_due_date] = useState("");
     const [new_priority, set_new_priority] = useState("Low");
 
+    const my_filters = useSelector(select_current_filters);
+    const my_sorters = useSelector(select_current_sorting);
+    const my_curr_page = useSelector(select_current_page);
+
     const new_todo_api = new_todo_function();
 
     function handle_exit_modal() {
@@ -65,19 +71,9 @@ export function NewToDo() {
                     : new Date(new_due_date).toISOString(),
             priority: new_priority,
         });
-        dispatch(
-            add_todo({
-                text: new_text,
-                due_date:
-                    new_due_date.length == 0
-                        ? ""
-                        : new Date(new_due_date).toISOString(),
-                priority: new_priority,
-                creation_date: new Date().toISOString(),
-            })
-        );
-        dispatch(sort_todo());
-        dispatch(refresh_filtered_todos());
+        setTimeout(() => {
+            refresh_todos(my_filters, my_sorters, my_curr_page, dispatch);
+        }, 100);
         handle_exit_modal();
     }
 

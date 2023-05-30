@@ -1,9 +1,15 @@
-import { set_todo, empty_todos, change_page } from "./features/todo/reducer";
+import {
+    set_last_id,
+    set_todo,
+    empty_todos,
+    change_page,
+} from "./features/todo/reducer";
 
 import {
     set_fil_sort_function,
     get_todos_page_function,
     get_nu_pages_function,
+    get_last_id_function,
 } from "./api/axios_methods";
 
 export function refresh_todos(my_filters, my_sorters, my_curr_page, dispatch) {
@@ -64,4 +70,14 @@ export function refresh_todos(my_filters, my_sorters, my_curr_page, dispatch) {
     }
 
     get_todos_api(handle_new_todos_page, { page: my_curr_page });
+
+    // Finally, retrieve the last index used for a to do.
+    const last_id_api = get_last_id_function();
+    last_id_api((response) => {
+        dispatch(
+            set_last_id({
+                id: response,
+            })
+        );
+    });
 }

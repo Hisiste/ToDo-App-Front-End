@@ -53,7 +53,6 @@ export const todo_slice = createSlice({
                         creation_date: action.payload.creation_date,
                     },
                 ];
-                state.last_id++;
             } else {
                 state.todos[selected_todo].text = action.payload.text;
                 state.todos[selected_todo].due_date = action.payload.due_date;

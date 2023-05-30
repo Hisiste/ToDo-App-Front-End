@@ -71,9 +71,9 @@ The program currently has/lacks the following functionality:
         them also by priority to see what tasks are more urgent or less urgent.
 -   [x] Mark "to do's" as done (clicking in a checkbox) or to undone a "to do".
     -   The undone functionality is just there if there is a mistake. :D
--   [ ] Since it is possible that you can have a lot of "to do's", there's the
+-   [x] Since it is possible that you can have a lot of "to do's", there's the
         need to paginate the list of "to do's".
--   [ ] Ability to know, in average, the time between creation and done for all
+-   [x] Ability to know, in average, the time between creation and done for all
         "to do's". This should be shown in general for all done "to do's" and
         also grouped by priority.
 

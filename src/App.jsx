@@ -3,6 +3,7 @@ import { Search } from "./ToDo-UI/Search";
 import { NewToDo } from "./ToDo-UI/NewToDo";
 import { ListToDos } from "./ToDo-UI/ListToDo";
 import { Pagination } from "./ToDo-UI/Pagination";
+import { Average } from "./ToDo-UI/averageTime";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -27,6 +28,7 @@ function App() {
             <NewToDo />
             <ListToDos />
             <Pagination />
+            <Average />
         </div>
     );
 }

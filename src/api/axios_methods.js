@@ -149,3 +149,17 @@ export function get_last_id_function() {
         }
     };
 }
+
+// getAverageTime().
+export function get_average_time_function() {
+    // Retrieve the average time to complete the to dos, given a priority.
+    // GET "/todos/average/{priority}"
+    return async (handler, priority) => {
+        try {
+            const response = await api.get(`/todos/average/${priority}`);
+            handler(response.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+}
